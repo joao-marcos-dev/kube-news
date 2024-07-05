@@ -1,0 +1,18 @@
+services:
+  kube_news:
+    image: joaomarcos200/kube-news:${KUBE_NEW_TAG}
+    build: 
+      context: ./src
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    networks:
+      - kube_news_net
+    depends_on:
+      - postgres
+    environment:
+      DB_DATABASE: ${POSTGRES_DB}
+      DB_USERNAME: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      DB_HOST: postgres 
+      DB_PORT: 5432 
